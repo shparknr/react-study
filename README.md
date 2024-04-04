@@ -86,7 +86,7 @@ body {
 ```
 
 : 꼭 기억하자.
-`box-sizing: border-box;`
+`box-sizing: border-box;` (지정 영역(px) 더 넓어지는것을 방지)
 : 필요시 기억하자
 `outline-style: none;`
 
