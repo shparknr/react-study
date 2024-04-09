@@ -51,3 +51,22 @@
   background-size: cover;
 }
 ```
+
+- flex 를 활용시 참고 사항
+- 기본적으로 flex 를 적용하면 줄내림은 없다.
+
+```css
+.box {
+  display: flex;
+  flex-wrap: nowrap;
+}
+```
+
+: 필요시 100% 넘는 item들이 있을 경우 줄내림 하려면
+
+```css
+.box {
+  display: flex;
+  flex-wrap: nowrap;
+}
+```
