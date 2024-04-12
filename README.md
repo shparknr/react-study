@@ -1,9 +1,8 @@
 # footer 작업
 
-- [XEICON](https://xpressengine.github.io/XEIcon/started.html)
+[XEICON](https://xpressengine.github.io/XEIcon/started.html)
 
-git```html
-
+```html
 <head>
   <link
     rel="stylesheet"
