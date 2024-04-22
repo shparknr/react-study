@@ -471,3 +471,501 @@ window.addEventListener("load", function () {
   width: 20px !important;
 }
 ```
+
+# js 4장
+
+- 호이스팅 (hositing) 은 변수, 함수를 선언하지 않았는데도 사용할수 있음.
+- hositing이 일어나지 않도록 주의 (var는 안쓰는게 좋다.)
+- var 변수명 = 변수값;
+- let 변수명 = 변수값;
+- const 변수명 = 변수값;
+
+```txt
+4장
+
+어플리케이션은 데이터를 다루는 것이다.
+프로그램은 데이터를 다루는것이다.
+Create, Read, Update, Delete
+데이터를 CRUD 하기위해 필요한것이 변수입니다.
+
+
+변수 (Variable) :
+하나의 값을 저장하기 위해 메모리공간 자체/ 메모리 공간 구분하기위해 이름을 붙인 것을 Syntax에서 변수 라고 합니다.
+
+값의 위치를 가리키는 상징적인 이름(단어)이다.
+
+
+
+컴퓨터에는 메모리(아파트)라고 하는 부품이 있어요.
+메모리(아파트) 에는 각 층별로 정말 많은 Room이 있어요.
+
+
+
+
+
+
+
+
+10
+
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x030001233409102382084810283) : 내가 아는 단어를 붙여서 (이름표(식별자)를 붙혀서) 보관할 수 있다.
+   ->'나이'라는 이름표(식별자)를 붙여둔다 (메모리 주소에다가)
+   -> 나이라고 이름표(식별자)를 붙여둔 메모리방에다가 10을 보관해줘
+
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+각 방에 이름표가 붙어있습니다 (메모리 주소 ex) 0x03000123340910238)
+
+
+
+
+변수선언
+
+ES5
+var 나이;
+==========
+ES6 (ECMAScript)
+let 나이2;
+const 나이3;
+
+
+호이스팅(hoisting) 은 변수를 선언하지 않았는데도 사용할수 있어요.
+                           변수를 선언하지 않았는데도 에러없이 실행됨.
+
+
+< ES5코드  >
+
+var 나이;
+console.log(나이)
+
+
+호이스팅발생 (변수호이스팅, 함수호이스팅)
+console.log(나이)
+gogo();
+
+var 나이;
+function gogo(){}
+
+
+---------------
+<ES6(ECMAScript)코드>
+호이스팅 발생하지만 에러 띄워준다.
+let 나이;
+const 나이;
+
+var age;
+이거보다는
+var age = 0;
+var age = "";
+초기값 숫자=0, 문자=""이라도 지어놓는게 낫다.
+```
+
+# css의 opacity와 position의 이해.
+
+- opacity 는 DOM의 내용까지도 투명도가 적용된다.
+
+  - 반투명 (내용도 반투명) > opacity: 0~1;
+  - 배경 반투명 내용은 그대로 사용하려면 > rgba (255,0,0,0.3)사용
+
+- position
+  - position 중에 absolute 로 픽셀 위치 설정의 경우 주의
+  - absolute 사용 시 반드시 position 코드가 바깥 영역에도 있어야 합니다.
+  - position 중에 fixed 는 웹브라우저를 기준으로 배치
+  - fixed는 반드시 left, top, right, bottom 을 주자
+  - fixed 는 보통 z-index를 준다.
+  - fixed 는 높이에 반영이 안되므로 주의하자.(레이아웃 배치문제)
+
+```css
+대상 {
+  position: relative;
+}
+대상 {
+  position: absolute;
+}
+대상 {
+  position: fixed;
+}
+```
+
+- 주의하자
+
+```css
+.box-wrap {
+  position: relative;
+  margin: 0 auto;
+  width: 600px;
+  height: 300px;
+  background: orange;
+}
+.box {
+  position: absolute;
+  right: 80px;
+  bottom: 20px;
+
+  width: 200px;
+  height: 200px;
+  background: red;
+}
+```
+
+# js 윈도우 스크롤의 위치를 알아내기
+
+```js
+window.addEventLinstenr("scoll", function () {
+  // 하고 싶은 일
+});
+```
+
+```js
+window.addEventLinstenr("scoll", function () {
+  // 스크롤바의 위치
+  const scY = window.scrollY;
+});
+```
+
+# js 로 css 의 클래스 동적으로 활용하기
+
+```js
+// DOM 찾아서 변수로 레퍼런스 하기
+const tags = document.querySelector(".클래스명");
+// DOM 을 이용해서 선택한 곳에 적용된 css 클래스 목록 추가
+tags.classList.add("클래스명");
+// DOM 을 이용해서 선택한 곳에 적용된 css 클래스 목록 제거
+tags.classList.remove("클래스명");
+// DOM 을 이용해서 선택한 곳에 적용된 css 클래스 목록 추가 / 제거
+tags.classList.toggle("클래스명");
+// DOM 을 이용해서 선택한 곳에 적용된 css 클래스 목록 포함여부
+tags.classList.contain("클래스명");
+```
+
+# js 의 함수란 ? 1번
+
+- 동일한 코드가 2번 이상 반복되면 함수를 만들려고 노력하자.
+- 반복은 되지 않더라도 하나의 기능이 너무 복잡하면 함수를 만들려고 노력하자.
+- 복잡하지는 않는데 코드가 너무 길어지면 함수로 묶어주려고 노력하자.
+- 실행의 결과가 그때, 그때 다른 경우에도 함수를 만들자.
+
+```js
+// 함수만들기(함수선언)
+function 적절한동사() {
+  // 하고 싶은 일 작성 ....
+}
+// 함수사용하기(함수호출)
+적절한동사();
+// 예 (함수 체이닝)
+fetch().then().then().catch();
+```
+
+- 함수는 무조건 1개의 값을 리턴하도록 규정되어 있습니다.
+- 리턴이라는 것은 함수 실행() 후 값을 돌려주는 것을 말합니다.
+
+```js
+function 함수명() {
+  // 몰래 작성됨 return undefined;
+}
+함수명();
+```
+
+# js 5장
+
+```txt
+이 책을 읽기 위한 중요한 단어가 많이나와요
+
+값 (value)
+: 표현식이 평가(식을 해석해서 값을 생성하고 참조하는 것)된 결과를 말한다.
+
+: 변수에 할당된 결과를 말한다.
+
+…변수란? : 컴퓨터 공간에 이름을 붙여둔 방 한개
+
+리터럴 (literal)
+
+: 사람이 이해할 수 있는 문자 또는 약속된 기호를 사용해서 값을 생성하는 표기법
+
+: 리터럴은 값을 평가해서 코드에 활용하기 위한 문법
+
+function goog (){} / 사람이  function gogo (){} 이라고 적으면 컴퓨터는 리터럴과정을 통해 함수로 평가해서 보관
+
+표현식 (expression)
+
+조건 : 반드시 리터럴과정으로 거쳐서 값을 보관할 수 있어야함
+
+: 리터럴 값으로 평가가 되면 OK!
+
+5 , 숫자 리터럴 값으로 평가가되면 OK!
+
+“안녕” 문자열 리터럴 값으로 평가가되면 OK!
+
+문 (statement)
+
+: 프로그램을 구성하는 기본단위 / 최소 실행단위
+
+var foo = x = 100 (평가가 끝나면  100,  표현식 O)
+```
+
+# js 의 함수란 ? 2번
+
+- 동일한 코드가 2번 이상 반복되면 함수를 만들려고 노력하자.
+- 반복은 되지 않더라도 하나의 기능이 너무 복잡하면 함수를 만들려고 노력하자.
+- 복잡하지는 않는데 코드가 너무 길어지면 함수로 묶어주려고 노력하자.
+- 실행의 결과가 그때, 그때 다른 경우에도 함수를 만들자.
+
+- 함수 정의문
+
+```js
+function 함수이름() {
+  //할일
+}
+```
+
+- 함수 실행/호출(call)문
+
+```js
+함수이름();
+```
+
+# js 의 함수의 매개변수란 ? 3번
+
+- 초기 기능 즉, 함수를 정의하기 전에 기능상 자주 변하는 데이터를 고민한다.
+- 기능은 스크롤시 특정 위치보다 커지면 css 추가하기
+- 이전 코드는 좋지 않은 코드라고 생각이 든다.
+- 함수는 스스로 지역 즉, Local 영역(Scope) 에서 `처리`되는것이 좋다고 봐요.
+- `처리`라는 말은 변수를 찾는다 던가
+- `처리`라는 말은 잘못된 값이 전달 되어서 오류가 나는것을 방지하는 것을 말합니다.
+
+```js
+// 홍길동에게 줄 함수
+const a = 5;
+const b = 0; // {지역변수}바깥 글로벌 변수에서 a,b 찾아보니깐 있다
+function 나누기() {
+  return a / b; // {지역변수 내에서 a,b 를 찾아보니없다}
+}
+나누기();
+```
+
+```js
+// 함수에서 일반변수로 접근하는것은 좋지않다 . 매개변수로 접근하자
+const a = 5;
+const b = 0;
+function 나누기(_num1, _num2) {
+  if (_num2 === 0) {
+    alret("나눗셈에서 0은 안됩니다.");
+  }
+  return _num1 / _num2;
+}
+나누기(a, b);
+```
+
+# js 6장
+
+```txt
+   데이터 타입 ( Data Type ) : 자료형
+   타입 이라는 말이 자료의 형태
+   JS의 리터럴로 처리될 수 있는 자료의 종류
+
+   타입 스크립트 : 데이터 종류를 표현해 주는 방식
+
+    '5'   , "55", `555`
+    'a'   , "ab", `55555`
+
+    "안녕
+      반가워
+    "
+    `안녕 ${100}
+      반가워
+    `
+
+    undefined 와  null 헷갈려요.
+    const a = undefined; (모르겠다.)
+    const b = null; (개발자가 직접 진짜 값이 비었다고 알려줌)
+
+    Symbol 은 중복되지 않는다고 보장하는 값 타입
+    Symbol()
+
+    데이터 타입 ( Data Type ) : 자료형
+    불변성(immutable) : 데이터 값이 변경될 수 없다.
+    데이터는 immutable 해야 합니다.
+    상태는   immutable 해야 합니다.
+    state는  immutable 해야 합니다.
+
+    1 = 1;
+
+
+    가변성(mutable) : 데이터 값이 변경될 수 있다.
+
+
+    원시데이터 6가지가 있는데 immutable 한 데이터 타입입니다.
+
+    number   1
+    string   'a'
+    undefined undefined
+    boolean    true, false
+    null       null
+    symbol     Symbol() 만들어진 값은 변경 불가
+
+     복합형 데이터 객체
+     객체는 원시데이터를 모아서 저장하고 관리하는 것.
+
+    // 묶어라, Block
+    const hong = {
+        age: 20,
+        marry : true
+     }
+
+
+     // 내가 c 라는 이름으로 저장할 거야
+     // c 라는 공간은 글자를 보관할 거야
+     // 그러니, 공간을 좀 마련해 줄래?
+
+     // C 를 사용하는 프로그래머는
+     char c = 'a'
+     int num = 5;
+
+     // js 를 사용하는 프로그래머는
+     const c = 'a';
+     const num = 5;
+
+     // ts 를 사용하는 프로그래머는
+     const c:string = 'a';
+     const num:number = 5;
+
+
+     // 오늘, 그리고 다음을 위해서 꼭 알아야 하는 단어
+
+     1. 데이터 타입 : 자료(리터럴 값)의 종류
+
+     2. js 에서는 값 리터럴에 따라 변수의 종류를 타입추론 한다.
+
+     3. 타입을 추측해서 프로그래머에게 물어보지않고 타입을 변경한다. (암묵적 타입변경)
+
+        let a = 1;
+        a = "안녕";
+
+        2번 3번은 원하지 않는 결과를 언젠가 실행됩니다.
+        의도하지 않은 오류를 일으킨다.
+
+        TypeScript
+
+        let a:number = 1;
+        a = "안녕"; // 오류 발생
+
+  // 코딩 할 때 스스로 고민해 보자.
+
+   1. 꼭 필요한 경우인지를 파악하고 변수를 만들자.
+   2. 변수 유효범위는 좁게 (블록을 가능하면 쓰자)
+   3. 전역변수는 가능하면 만들지 말자.
+   4. 변수는 상수를 쓰세요.
+
+      let a = 1; (X)
+
+      const count = 1;
+
+      {
+        let count = 2;
+      }
+```
+
+# 함수의 이해 7번
+
+1. 함수를 만들어야겠다고 판단하는 케이스
+
+- 동일한 코드가 2번 이상 반복되면 함수를 만들려고 노력하자.
+- 반복은 되지 않더라도 하나의 기능이 너무 복잡하면 함수를 만들려고 노력하자.
+- 복잡하지는 않는데 코드가 너무 길어지면 함수로 묶어주려고 노력하자.
+- 실행의 결과가 그때, 그때 다른 경우에도 함수를 만들자.
+
+2. 왜 화살표 함수를 만들지?
+
+- 트렌드
+- 코드가 해석하기 더 어려워집니다.
+
+: 함수에서 화살표 함수로 바꾸기. (매개변수가 없는경우)
+
+```js
+function say() {
+  console.log("안녕", this);
+}
+```
+
+: step 1.
+
+```js
+say() => {
+  console.log("안녕", this);
+}
+```
+
+: step 2.
+
+```js
+const say = () => {
+  console.log("안녕", this);
+};
+```
+
+: 함수에서 화살표 함수로 바꾸기. (매개변수가 있는경우)
+
+```js
+function say(_who) {
+  console.log("안녕", _who, this);
+}
+```
+
+: step 1.
+
+```js
+const say = (_who) => {
+  console.log("안녕", _who, this);
+};
+```
+
+- this를 정확히 지정하기 위해서 활용한다.
+  - 화살표 함수를 사용하면 일반적으로 큰 고민없이 사용하면 됩니다.
+  - 하지만, 함수 안에 this 를 작성하시면 상황이 달라집니다.
+  - 화살표 함수에서 this는 window를 가르킵니다.
+  - 결론은 화살표 함수에서 this를 사용한다면 console.log(this) 확인 필수!!
+  - 화살표 함수는 예전 일반 함수에서 window를 참조하지 못하는 문제를 해결함.
+
+```js
+// this 의 차이(어렵지만 이해해야 해요.)
+const btWrap = document.querySelector(".bt-wrap");
+// 일반 함수는 this 가 타이핑이 된 곳을 가르킨다.
+btWrap.addEventListener("click", function () {
+  console.log(this);
+});
+btWrap.addEventListener("click", () => {
+  console.log(this);
+});
+```
+
+# 배열의 이해
+
+- [요소, 요소, 요소, 요소]
+  - 요소로 담을 수 있는 자료형은 7가지 입니다.
+- 배열의 속성(배열을 위한 특별한 변수)은 1개가 있습니다.
+  : length 가 있어요. (요소의 개수) (배열명.length)
+- 배열의 메소드(배열을 위한 특별한 함수)는 너무 많아요.
+- 상당히 많은 메소드(배열을 위한 함수)가 있습니다.
+- 배열.forEach((요소)=>{}), 배열.map((요소)=>{}), 배열.filter((요소)=>{}), 배열.find((요소)=>{})
+- 배열의 요소를 하나씩 접근해서 활용하기
+
+- `배열.forEach()`
+
+```js
+result.forEach((item) => {
+  const tag = `<a href=${item.link} class="list-box">
+        <div class="list-box-img br-20" style="background: url('./images/${item.imgpath}') no-repeat center; background-size: cover"></div>
+        <div class="list-box-cate">
+          <img src="./images/icon/${item.icon}" alt="${item.category}" />
+          <span style="color:${item.txtcolor};">${item.category}</span>
+        </div>
+        <p class="list-box-title">${item.title}</p>
+        <span class="list-box-day">${item.day}</span>
+        </a>`;
+  allTag = allTag + tag;
+});
+```
